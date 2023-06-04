@@ -99,8 +99,7 @@ mod tests {
     fn test_parse_exec_time() {
         assert_approx_eq!(
             parse_exec_time(&format!(
-                "🎄 Part 1 🎄\n0 (elapsed: 74.13ns){}\n🎄 Part 2 🎄\n0 (elapsed: 50.00ns){}",
-                ANSI_RESET, ANSI_RESET
+                "🎄 Part 1 🎄\n0 (elapsed: 74.13ns){ANSI_RESET}\n🎄 Part 2 🎄\n0 (elapsed: 50.00ns){ANSI_RESET}"
             )),
             0_f64
         );
