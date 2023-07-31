@@ -1,34 +1,20 @@
 use std::collections::HashMap;
 
-fn PointsFromResult(Shapes: Vec<&str>) -> u32 {
+fn PointsFromPlayedResult(Shapes: Vec<&str>) -> u32 {
     let rounds = HashMap::from([
-        ("AX".to_string(), 3),
-        ("AY".to_string(), 6),
-        ("AZ".to_string(), 0),
-        ("BX".to_string(), 0),
-        ("BY".to_string(), 3),
-        ("BZ".to_string(), 6),
-        ("CX".to_string(), 6),
-        ("CY".to_string(), 0),
-        ("CZ".to_string(), 3),
+        ("AX".to_string(), 4),
+        ("AY".to_string(), 8),
+        ("AZ".to_string(), 3),
+        ("BX".to_string(), 1),
+        ("BY".to_string(), 5),
+        ("BZ".to_string(), 9),
+        ("CX".to_string(), 7),
+        ("CY".to_string(), 2),
+        ("CZ".to_string(), 6),
     ]);
 
     let ThisRound: String = Shapes.join("");
     rounds[&ThisRound]
-}
-
-fn PointsFromShape(Shape: &str) -> u32 {
-    let mut result: u32 = 0;
-    match Shape {
-        "X" => result = 1,
-        "Y" => result = 2,
-        "Z" => result = 3,
-        "A" => result = 1,
-        "B" => result = 2,
-        "C" => result = 3,
-        _ => print!("Not valid Shape"),
-    }
-    result
 }
 
 fn PointsFromExpectedResult(Shapes: Vec<&str>) -> u32 {
@@ -54,8 +40,7 @@ pub fn parse_input1(input: &str, score: &mut u32) {
         if line.is_empty() {
         } else {
             let Shapes: Vec<&str> = line.split(' ').collect();
-            RoundScore += PointsFromShape(Shapes[1]);
-            RoundScore += PointsFromResult(Shapes);
+            RoundScore += PointsFromPlayedResult(Shapes);
         }
         *score += RoundScore;
     }
