@@ -73,7 +73,7 @@ pub fn part_one(input: &str) -> Option<u32> {
     for line in input.lines() {
         let SplitStrings: (&str, &str) = line.split_at(line.len() / 2);
         let firstHalf: String = SplitStrings.0.to_string();
-        let secondtHalf: String = SplitStrings.0.to_string();
+        let secondtHalf: String = SplitStrings.1.to_string();
 
         let duplicateLetter: char = FindDuplicate(&firstHalf, &secondtHalf);
         Result += GetPriority(&duplicateLetter);
