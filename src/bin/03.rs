@@ -10,6 +10,18 @@ fn FindDuplicate(firstHalf: &String, secondHalf: &String) -> char {
     duplicate
 }
 
+fn FindTripleDuplicate(firstPart: &String, secondPart: &String, thirdPart: &String) -> char {
+    let mut duplicate: char = '1';
+    for letter in secondPart.chars() {
+        if (firstPart.contains(letter)) {
+            if (thirdPart.contains(letter)) {
+                duplicate = letter;
+            }
+        }
+    }
+    duplicate
+}
+
 fn GetPriority(duplicate_letter: &char) -> u32 {
     let priority = HashMap::from([
         ('a', 1),
@@ -82,7 +94,29 @@ pub fn part_one(input: &str) -> Option<u32> {
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    None
+    let mut Result: u32 = 0;
+    let mut lineCount: u32 = 0;
+
+    let mut FirstLine: String = ' '.to_string();
+    let mut SecondLine: String = ' '.to_string();
+    let mut ThirdLine: String = ' '.to_string();
+
+    for line in input.lines() {
+        lineCount += 1;
+        match lineCount {
+            1 => FirstLine = line.to_string(),
+            2 => SecondLine = line.to_string(),
+            3 => {
+                ThirdLine = line.to_string();
+                let duplicateLetter: char =
+                    FindTripleDuplicate(&FirstLine, &SecondLine, &ThirdLine);
+                Result += GetPriority(&duplicateLetter);
+                lineCount = 0;
+            }
+            _ => {}
+        }
+    }
+    Some(Result)
 }
 fn main() {
     let input = &advent_of_code::read_file("inputs", 3);
@@ -103,6 +137,6 @@ mod tests {
     #[test]
     fn test_part_two() {
         let input = advent_of_code::read_file("examples", 3);
-        assert_eq!(part_two(&input), None);
+        assert_eq!(part_two(&input), Some(70));
     }
 }
